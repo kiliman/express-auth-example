@@ -4,7 +4,7 @@
   "description": "",
   "license": "",
   "scripts": {
-    "postinstall": "remix setup node",
+    "postinstall": "npx patch-package && remix setup node",
     "clean": "rm -rf ./server/build ./public/build",
     "build": "remix build",
     "dev": "remix watch",
@@ -42,6 +42,7 @@
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "@types/uuid": "^8.3.1",
+    "patch-package": "^6.4.7",
     "prettier": "^2.4.1",
     "tailwindcss": "^3.0.8",
     "typescript": "^4.1.2"

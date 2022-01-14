@@ -1,0 +1,13 @@
+diff --git a/node_modules/@remix-run/server-runtime/server.js b/node_modules/@remix-run/server-runtime/server.js
+index d723f76..922edb5 100644
+--- a/node_modules/@remix-run/server-runtime/server.js
++++ b/node_modules/@remix-run/server-runtime/server.js
+@@ -164,7 +164,7 @@ async function handleDataRequest({
+       return errorBoundaryError(error, 500);
+     }
+ 
+-    return errorBoundaryError(new Error("Unexpected Server Error"), 500);
++    return errorBoundaryError(error, 500);
+   }
+ }
+ 
