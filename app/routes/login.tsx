@@ -6,6 +6,7 @@ import {
   MetaFunction,
   redirect,
   useActionData,
+  useLocation,
 } from 'remix'
 import { getTokenForUser, getUserFromToken, verifyUser } from '~/db/user.server'
 import { RemixLogo } from '~/root'
