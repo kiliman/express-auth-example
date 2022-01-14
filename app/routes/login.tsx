@@ -26,8 +26,7 @@ export let action: ActionFunction = async ({ request }) => {
   const user = await getUserFromToken(token)
 
   const url = new URL(request.url)
-
-  let returnUrl = url.searchParams.get('returnUrl') ?? '/'
+  const returnUrl = url.searchParams.get('returnUrl') ?? '/'
   return redirect(returnUrl, {
     headers: {
       'set-cookie': `auth=${token}; HttpOnly; SameSite=strict; path=/`,
@@ -37,6 +36,7 @@ export let action: ActionFunction = async ({ request }) => {
 
 export default function () {
   const data = useActionData()
+  const location = useLocation()
   return (
     <div className="flex min-h-screen bg-white">
       <div className="flex flex-col flex-1 px-4 py-4 sm:justify-center sm:py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -175,7 +175,12 @@ export default function () {
             </div>
 
             <div className="mt-6">
-              <Form replace method="post" className="space-y-6">
+              <Form
+                replace
+                method="post"
+                action={`${location.pathname}${location.search}`}
+                className="space-y-6"
+              >
                 <div>
                   <label
                     htmlFor="email"

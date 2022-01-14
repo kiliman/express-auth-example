@@ -74,6 +74,15 @@ function unauthenticated(req, res) {
   if (url.pathname.startsWith('/api')) {
     return res.status(401).send('Unauthenticated')
   }
+
+  const isDataRequest = url.searchParams.has('_data')
+  if (isDataRequest) url.searchParams.delete('_data')
+
   const returnUrl = encodeURI(`${url.pathname}${url.search}`)
-  return res.redirect(`/login?returnUrl=${returnUrl}`)
+  const redirectUrl = `/login?returnUrl=${returnUrl}`
+
+  return isDataRequest
+    ? // special handling for redirect from data requests
+      res.status(204).set('x-remix-redirect', redirectUrl).send()
+    : res.redirect(redirectUrl)
 }
